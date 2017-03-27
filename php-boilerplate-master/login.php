@@ -1,4 +1,5 @@
 <?php 
+	session_start();
 	// Get values passe from form in loging.php file
 	$username = $_POST["user"];
 	$pass = $_POST['pass'];
@@ -16,10 +17,12 @@
 	$row = $result->fetch();
 	if(password_verify($pass, $row["password"]))
 	{
-		$message = urlencode("Succesfully logged in");
-		header("location: index.php?message=" . $message);
+		$_SESSION["logged_in"] = true;
+		header("location: index.php");
 	}
 	else
 	{
-		die("Failed to login");
+		$_SESSION["logged_in"] = false;
 	}
+
+header("location: index.php");

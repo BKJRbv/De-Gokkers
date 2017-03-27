@@ -1,4 +1,7 @@
-  <!DOCTYPE html>
+<?php 
+session_start();
+ ?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -14,6 +17,8 @@
         <img id="dino_header" src="img/dino.png">
         <h1>De Gokkers</h1>
         <div class="form">
+          
+
           <form action="register.php" method="POST">
             <p>
               <label>Username</label>
@@ -34,7 +39,7 @@
 
             <form action="login.php" method="POST">
               <p>
-                <label>Username</label>
+                <label>Username</lqabel>
                 <input type="text" id="user" name="user">
               </p>
               <p>
@@ -46,6 +51,9 @@
               </p>
             </form>
             <div class="button">
+
+          </form>
+
             </div>
           </div>
 
@@ -60,17 +68,22 @@
             <div class="hero_download">
               
               <?php 
-                if(isset($_GET["message"]))
-                {
-              
-                  echo "<a href='game/DeGokkers.exe' downloads><img src=\"img/download.png\"></a>";
-                }
-                else
-                {
-                  echo "You must be logged in to download";
-                }
 
+                if(isset($_SESSION["logged_in"]))
+                {
+                  if($_SESSION["logged_in"] == true)
+                  {
+                    echo '<p>' . "Youre logged in" . '</p>';
+                    echo "<a href='game/DeGokkers.exe' downloads><img src=\"img/download.png\"></a>";
+                    echo '<form action="logout.php"> <input type="submit" id="btn" value="Logout">';
+                        
+                  }
+                  else
+                  {
+                    echo "You must be logged in to download";
+                  }
 
+                }
                ?>
           </div>
         </div>
